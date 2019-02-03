@@ -1,53 +1,48 @@
-window.onload = function() {
-	let body = document.getElementsByTagName('body')[0];
-	let elem = document.createElement('div'); 
-	elem.innerHTML = "My DIV";
-	body.appendChild(elem);
+'use strict';
 
-	/*
-	installReact();
+const e = React.createElement;
 
-	class Clock extends React.Component {
-	  render() {
-		return (
-		  <div>
-			<h1>Hello, world!</h1>
-			<h2>It is {this.props.date.toLocaleTimeString()}.</h2>
-		  </div>
-		);
-	  }
-	}
+class LikeButton extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { liked: false };
+  }
 
-	function tick() {
-	  ReactDOM.render(
-		<Clock date={new Date()} />,
-		document.getElementById('root')
-	  );
-	}
+  render() {
+    if (this.state.liked) {
+      return 'You liked this.';
+    }
 
-	setInterval(tick, 1000);
-	//*/
+    return e(
+      'button',
+      { onClick: () => this.setState({ liked: true }) },
+      'Like'
+    );
+  }
 }
 
-function installReact() {
-	/*
-	let head = document.getElementsByTagName('head')[0];
-	let script = document.createElement('script');
-	script.src = 'https://unpkg.com/react@16/umd/react.production.min.js';
-	head.appendChild(script);
+class Clock extends React.Component {
+  constructor(props) {
+    super(props);
+	this.time = "Time";
+  }
 
-	script = document.createElement('script');
-	script.src = 'https://unpkg.com/react-dom@16/umd/react-dom.production.min.js';
-	head.appendChild(script);
-	//*/
+  render() {
+	let currentTime = new Date().toLocaleTimeString();
+	return <div>{this.props.mytime} {this.time}: {currentTime}</div>;
+  }
 
-	let head = document.getElementsByTagName('head')[0];
-	let script = document.createElement('script');
-	script.src = 'js/react.production.min.js';
-	head.appendChild(script);
+  mick() {
 
-	script = document.createElement('script');
-	script.src = 'js/react-dom.production.min.js';
-	head.appendChild(script);
+  }
 }
 
+function tick() {
+	let elem = document.body;
+	ReactDOM.render(
+		<Clock mytime="React"/>
+		,elem
+	);
+}
+
+setInterval(tick, 1000);
